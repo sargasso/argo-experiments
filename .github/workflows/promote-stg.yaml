@@ -3,7 +3,7 @@ name: Promote to Stg
 on:
   push:
     branches:
-      - dev
+      - main
     paths:
       - helm/env/dev/version.yaml
 
@@ -12,7 +12,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  promote:
+  promote-stg:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
