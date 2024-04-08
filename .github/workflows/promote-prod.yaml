@@ -5,7 +5,7 @@ on:
     types:
       - closed
     paths:
-      - app/env/stg/version.yaml
+      - helm/env/stg/version.yaml
 
 permissions:
   contents: write
@@ -25,10 +25,10 @@ jobs:
           git switch -c prod/${{ github.sha }}
 
           # promote the change
-          cp app/env/stg/version.yaml app/env/prod/version.yaml
+          cp helm/env/stg/version.yaml helm/env/prod/version.yaml
 
           # push the change to the new branch
-          git add app/env/prod/version.yaml
+          git add helm/env/prod/version.yaml
           git commit -m "Promote Stg to Prod"
           git push -u origin prod/${{ github.sha }}
       - run: |

@@ -3,9 +3,9 @@ name: Promote to Stg
 on:
   push:
     branches:
-      - main
+      - dev
     paths:
-      - app/env/dev/version.yaml
+      - helm/env/dev/version.yaml
 
 permissions:
   contents: write
@@ -25,10 +25,10 @@ jobs:
           git switch -c stg/${{ github.sha }}
 
           # promote the change
-          cp app/env/dev/version.yaml app/env/stg/version.yaml
+          cp helm/env/dev/version.yaml helm/env/stg/version.yaml
 
           # push the change to the new branch
-          git add app/env/stg/version.yaml
+          git add helm/env/stg/version.yaml
           git commit -m "Promote Dev branch to Stg"
           git push -u origin stg/${{ github.sha }}
       - run: |
