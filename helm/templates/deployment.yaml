@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smokeping-{{ .Values.env }}
+spec:
+  replicas: {{ .Values.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: smokeping-{{ .Values.env }}
+  template:
+    metadata:
+      name: smokeping-{{ .Values.env }}
+      labels:
+        app: smokeping-{{ .Values.env }}
+    spec:
+      containers:
+        - name: smokeping-{{ .Values.env }}
+          image: {{ .Values.deployment.image.name }}:{{ .Values.deployment.image.tag }}
