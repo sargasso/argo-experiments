@@ -35,7 +35,7 @@ jobs:
           gh pr create \
             -B main \
             -H stg/${{ github.sha }} \
-            --title "Promote Dev branch to Stg" \
+            --title "Promote Dev:${{ github.sha }} to Stg" \
             --body "Automatically created by GitHub Actions"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

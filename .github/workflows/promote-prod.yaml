@@ -35,7 +35,7 @@ jobs:
           gh pr create \
             -B main \
             -H prod/${{ github.sha }} \
-            --title "Promote Stg to Prod" \
+            --title "Promote Stg:${{ github.sha }} to Prod" \
             --body "Automatically created by GHA"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
