@@ -1,0 +1,5 @@
+apiVersion: v2
+name: smokeping
+description: Smokeping Argo Experiments
+type: application
+version: 0.0.1
