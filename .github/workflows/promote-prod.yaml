@@ -1,0 +1,41 @@
+name: Promote to Prod
+
+on:
+  pull_request:
+    types:
+      - closed
+    paths:
+      - app/env/stg/version.yaml
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  promote:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          # configure git client
+          git config --global user.email "cicd@qonium.net"
+          git config --global user.name "cicd"
+
+          # create a new branch
+          git switch -c prod/${{ github.sha }}
+
+          # promote the change
+          cp app/env/stg/version.yaml app/env/prod/version.yaml
+
+          # push the change to the new branch
+          git add app/env/prod/version.yaml
+          git commit -m "Promote Stg to Prod"
+          git push -u origin prod/${{ github.sha }}
+      - run: |
+          gh pr create \
+            -B main \
+            -H prod/${{ github.sha }} \
+            --title "Promote Stg to Prod" \
+            --body "Automatically created by GHA"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
