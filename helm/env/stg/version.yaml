@@ -1,4 +1,4 @@
 deployment:
   image:
     name: lscr.io/linuxserver/smokeping
-    tag: 2.8.2-r3-ls86
+    tag: 2.8.2-r3-ls87
